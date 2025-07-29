@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansh Cafe - Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Background with responsive animation */
+        body {
+            background-image: url("https://tourist-images-prd-s3.s3.eu-west-1.amazonaws.com/ipd863rxx7adkf8g3zypv0j0nfg2");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("https://tourist-images-prd-s3.s3.eu-west-1.amazonaws.com/ipd863rxx7adkf8g3zypv0j0nfg2");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: -1;
+            animation: zoomInOut 10s infinite ease-in-out;
+        }
+
+        @keyframes zoomInOut {
+            0%, 100% { background-size: 100%; }
+            50% { background-size: 110%; }
+        }
+
+        /* Header styling */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 7%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            flex-wrap: wrap;
+        }
+
+        .header .logo img {
+            height: 4rem;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .navbar a {
+            font-size: 1.4rem;
+            color: #fff;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .navbar a:hover {
+            color: rgb(239, 226, 205);
+            border-bottom: 0.2rem solid aliceblue;
+            padding-bottom: 0.5rem;
+        }
+
+        .icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icons div {
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.8rem;
+        }
+
+        .icons div:hover {
+            color: rgb(239, 226, 205);
+        }
+
+        .nav-search {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            height: 40px;
+            border-radius: 5px;
+            margin: 0 1rem;
+            flex: 1;
+            max-width: 400px;
+            min-width: 150px;
+        }
+
+        .search-list {
+            background-color: #f3f3f3;
+            width: 60px;
+            text-align: center;
+            border-radius: 5px;
+            border: none;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            padding: 0 5px;
+        }
+
+        .search-input {
+            width: 100%;
+            font-size: 1rem;
+            border: none;
+            padding: 0 10px;
+        }
+
+        .search-icon {
+            width: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            color: #0f1111;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .nav-search:hover {
+            border: 2px solid orange;
+        }
+
+        /* Menu styling */
+        .menu {
+            padding-top: 120px;
+            padding-bottom: 80px;
+        }
+
+        .menu h1 {
+            text-align: center;
+            font-weight: 600;
+            font-size: 3.5rem;
+            color: antiquewhite;
+            margin-bottom: 40px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .menu .box {
+            height: auto;
+            background: #222;
+            border: 2px solid #444;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu .box img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .menu .box h3 {
+            color: #f39c12;
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .menu .box .price {
+            color: #fff;
+            font-size: 1.8rem;
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+
+        .menu .box:hover {
+            background: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-color: #f39c12;
+        }
+
+        .menu .box:hover .price {
+            color: #000;
+        }
+
+        .menu .box .btn {
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .menu .box .btn:hover {
+            background-color: #e67e22;
+            transform: scale(1.05);
+        }
+
+        /* Footer styling */
+        .footer {
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 50px 0 0;
+            position: relative;
+            width: 100%;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: #f39c12;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: #f39c12;
+        }
+
+        .footer-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #f39c12;
+            transform: translateY(-3px);
+        }
+
+        .footer-section a {
+            display: block;
+            color: #ddd;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #f39c12;
+            padding-left: 5px;
+        }
+
+        .footer-section p i {
+            color: #f39c12;
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .footer-section input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .footer-section button {
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .footer-section button:hover {
+            background: #e67e22;
+        }
+
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid #444;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #aaa;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .header {
+                padding: 1rem 5%;
+            }
+            
+            .navbar {
+                gap: 1rem;
+            }
+            
+            .menu h1 {
+                font-size: 3rem;
+            }
+            
+            .footer-content {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 1rem;
+                position: relative;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .navbar {
+                margin: 15px 0;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .nav-search {
+                margin: 10px 0;
+                max-width: 100%;
+                order: 3;
+            }
+            
+            .icons {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            .menu {
+                padding-top: 40px;
+            }
+            
+            .menu h1 {
+                font-size: 2.5rem;
+                margin-bottom: 30px;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar a {
+                font-size: 1.2rem;
+                padding: 5px;
+            }
+            
+            .menu h1 {
+                font-size: 2.2rem;
+            }
+            
+            .menu .box {
+                padding: 1rem;
+            }
+            
+            .menu .box img {
+                height: 150px;
+            }
+            
+            .menu .box h3 {
+                font-size: 1.3rem;
+            }
+            
+            .menu .box .price {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <a href="#" class="logo">
+                <img src="anshcafeimage.jpg" alt="Ansh Cafe Logo">
+            </a>
+            <nav class="navbar">
+                <a href="ansh cafe .html">Home</a>
+                <a href="about.html">About</a>
+                <a href="Menu.html">Menu</a>
+                <a href="product.html">Product</a>
+                <a href="contact..html">Contact</a>
+                <a href="review.html">Review</a>
+            </nav>
+            <div class="nav-search">
+                <select class="search-list">
+                    <option>All</option>
+                </select>
+                <input placeholder="Search" class="search-input">
+                <div class="search-icon">
+                    <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            <div class="icons">
+                <div class="fas fa-search" id="search-btn"></div>
+                <a href="cart.html">
+                    <div class="fas fa-shopping-cart" id="cart-btn"></div>
+                </a>
+                <div class="fas fa-bars" id="menu-btn"></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="menu" id="menu">
+        <h1>OUR MENU</h1>
+
+        <div class="container">
+            <div class="row">
+                <!-- First Row -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="box">
+                        <img src="https://e7.pngegg.com/pngimages/425/710/png-clipart-indian-thali-plate-vegetarian-cuisine-indian-cuisine-punjabi-cuisine-dal-baati-ugadi-food-plate.png" alt="Indian Thali">
+                        <h3>Royal Thali</h3>
+                        <div class="price">$22.99</div>
+                        <button class="btn">Add To Cart</button>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="box">
+                        <img src="https://th.bing.com/th/id/OIP.fe2rgvPzlStO9JvcS9mMpgAAAA?rs=1&pid=ImgDetMain" alt="Paneer Dish">
+                        <h3>Paneer Butter Masala</h3>
+                        <div class="price">$16.99</div>
+                        <button class="btn">Add To Cart</button>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="box">
+                        <img src="https://img.freepik.com/premium-psd/indian-cuisine-isolated-transparent-background_191095-41645.jpg" alt="Indian Cuisine">
+                        <h3>Spicy Chicken Curry</h3>
+                        <div class="price">$18.99</div>
+                        <button class="btn">Add To Cart</button>
+                    </div>
+                </div>
+
+                <!-- Second Row -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="box">
+                        <img src="https://i.pinimg.com/736x/45/3e/f9/453ef906e6e699d8fe990ac5d443a065.jpg" alt="Indian Food">
+                        <h3>Vegetable Biryani</h3>
+                        <div class="price">$14.99</div>
+                        <button class="btn">Add To Cart</button>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="box">
+                        <img src="https://th.bing.com/th/id/OIP.dw4Ae58fNg9kp3qv7wT4dAHaHq?w=840&h=870&rs=1&pid=ImgDetMain" alt="Indian Meal">
+                        <h3>Tandoori Platter</h3>
+                        <div class="price">$24.99</div>
+                        <button class="btn">Add To Cart</button>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="box">
+                        <img src="https://images.rawpixel.com/image_png_600/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTExL3Jhd3BpeGVsb2ZmaWNlMTlfYV9pbmRpYW5fbWVhbF90cmF5X19oaW50X29mX2ZsYXRsYXlfb2JqZWN0X191c18wY2U2NGE5YS04YzVjLTRkMDctYTE0MS01MTBlODlhZGU0ODEucG5n.png" alt="Indian Meal Tray">
+                        <h3>South Indian Platter</h3>
+                        <div class="price">$19.99</div>
+                        <button class="btn">Add To Cart</button>
+                    </div>
+                </div>
+
+                <!-- Third Row -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="box">
+                        <img src="https://img.freepik.com/premium-psd/indian-food-indian-food-thali-north-indian-thali_932730-1485.jpg" alt="North Indian Thali">
+                        <h3>North Indian Thali</h3>
+                        <div class="price">$21.99</div>
+                        <button class="btn">Add To Cart</button>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="box">
+                        <img src="https://img.freepik.com/premium-psd/indian-cuisine-isolated-transparent-background_1085577-38921.jpg" alt="Indian Cuisine">
+                        <h3>Butter Naan with Dal</h3>
+                        <div class="price">$12.99</div>
+                        <button class="btn">Add To Cart</button>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6">
+                    <div class="box">
+                        <img src="https://thumbs.dreamstime.com/b/fresh-organic-fruits-vegetables-cotton-eco-bags-zero-waste-concept-flat-lay-145140153.jpg" alt="Fresh Fruits">
+                        <h3>Fresh Fruit Platter</h3>
+                        <div class="price">$10.99</div>
+                        <button class="btn">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Ansh Cafe</h3>
+                <p>Experience the finest flavors at Ansh Cafe, where tradition meets taste. We serve authentic Indian cuisine with a modern twist, made from the freshest ingredients and traditional recipes passed down through generations.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="Menu.html">Our Menu</a></li>
+                    <li><a href="product.html">Special Offers</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="review.html">Reviews</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Food Street, Indore, Madhya Pradesh, India</p>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> info@anshcafe.com</p>
+                <p><i class="fas fa-clock"></i> Mon - Sun: 8:00 AM - 11:00 PM</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for special offers and updates!</p>
+                <div class="nav-search" style="background: #333; border: 1px solid #555; margin-top: 1rem;">
+                    <input placeholder="Your email..." class="search-input" style="background: transparent; color: #fff;">
+                    <div class="search-icon" style="background: #f39c12;">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Ansh Cafe. All rights reserved. | Designed with ❤️ for food lovers</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Ansh Restaurant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body { 
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://wallpapercave.com/wp/wp1874166.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(0, 0, 0, 0.85);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid #d4af37;
+        }
+        
+        .logo h1 {
+            color: #d4af37;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #fff;
+            font-weight: 300;
+        }
+        
+        .navbar {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        
+        .navbar a:hover {
+            background: #d4af37;
+            color: #000;
+        }
+        
+        .menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: #d4af37;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        /* Contact Content */
+        .contact-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .contact-form-container {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-right-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .contact-right-title h1 {
+            font-weight: 600;
+            color: #d4af37;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .contact-right-title hr {
+            border: none;
+            width: 100px;
+            height: 4px;
+            background-color: #d4af37;
+            border-radius: 10px;
+            margin: 0 auto;
+        }
+        
+        .input {
+            width: 100%;
+            height: 50px;
+            border: none;
+            outline: none;
+            padding: 0 25px;
+            font-weight: 500;
+            color: #333;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .input:focus {
+            border: 2px solid #d4af37;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        
+        input::placeholder {
+            color: #666;
+        }
+        
+        .contact-right textarea {
+            height: 150px;
+            padding: 15px 25px;
+            border-radius: 20px;
+            resize: vertical;
+        }
+        
+        .contact-right button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #000;
+            gap: 10px;
+            border: none;
+            border-radius: 50px;
+            background: #d4af37;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .contact-right button:hover {
+            background: #ffd700;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .map-container {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 500px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Additional Contact Info */
+        .contact-info {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        
+        .info-card {
+            flex: 1;
+            min-width: 250px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-10px);
+            background: rgba(212, 175, 55, 0.15);
+        }
+        
+        .info-icon {
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+        
+        .info-card h3 {
+            color: #d4af37;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .info-card p {
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 40px 0 20px;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 2px solid #d4af37;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            text-align: left;
+        }
+        
+        .footer-section h3 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #d4af37;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4af37;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 1px solid #d4af37;
+        }
+        
+        .social-link:hover {
+            background: #d4af37;
+            color: #000;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            width: 100%;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .contact-form-container, .map-container {
+                width: 100%;
+            }
+            
+            .map-container {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            }
+            
+            .navbar.show {
+                display: flex;
+            }
+            
+            .menu-btn {
+                display: block;
+            }
+            
+            .contact-right-title h1 {
+                font-size: 2rem;
+            }
+            
+            .map-container {
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .contact-form-container {
+                padding: 20px;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .footer-section {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <!-- <header class="header">
+        <div class="logo">
+            <img src="https://images.unsplash.com/photo-1610878180933-123728745d22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FuYWRhJTIwbmF0dXJlfGVufDB8fDB8fHww&w=1000&q=80" alt="Ansh Restaurant Logo">
+            <h1>ANSH <span>RESTAURANT</span></h1>
+        </div>
+        
+        <nav class="navbar" id="navbar">
+            <a href="ansh cafe .html">Home</a>
+            <a href="about.html">About</a>
+            <a href="Menu.html">Menu</a>
+            <a href="product.html">Special Offers</a>
+            <a href="contact..html" class="active">Contact</a>
+            <a href="review.html">Reviews</a>
+        </nav>
+        
+        <button class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header> -->
+    
+    <!-- Contact Section -->
+    <div class="contact-container">
+        <div class="contact-form-container">
+            <div class="contact-right-title">
+                <h1>CONTACT US</h1>
+                <hr>
+                <p style="color: #ddd; margin-top: 15px;">We'd love to hear from you!</p>
+            </div>
+            
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="7f4c9a9f-cab3-480e-9d39-be4f3766120c">
+                
+                <input type="text" name="name" placeholder="Your Name" class="input" required>
+                <input type="email" name="email" placeholder="Your Email" class="input" required>
+                <input type="text" name="subject" placeholder="Subject" class="input" required>
+                <textarea name="message" placeholder="Your message" class="input" required></textarea>
+                
+                <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3668.441574438273!2d79.94635477509594!3d23.154078379081753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3981add8eb101a65%3A0xe3bf84c1e41ef4cc!2sIndian%20Coffee%20House!5e0!3m2!1sen!2sin!4v1725184388794!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        
+        <div class="contact-info">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Our Location</h3>
+                <p>123 Gourmet Street, Foodville<br>New York, NY 10001</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>Call Us</h3>
+                <p>+1 (555) 123-4567<br>+1 (555) 987-6543</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Email Us</h3>
+                <p>info@anshrestaurant.com<br>reservations@anshrestaurant.com</p>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Opening Hours</h3>
+                <p>Monday-Friday: 11am - 10pm<br>Saturday-Sunday: 10am - 11pm</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Ansh Cafe</h3>
+                <p>Experience the finest flavors at Ansh Cafe, where tradition meets taste. We serve authentic Indian cuisine with a modern twist, made from the freshest ingredients and traditional recipes passed down through generations.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="ansh cafe .html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="Menu.html">Our Menu</a></li>
+                    <li><a href="product.html">Special Offers</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="review.html">Reviews</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Food Street, Indore, Madhya Pradesh, India</p>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> info@anshcafe.com</p>
+                <p><i class="fas fa-clock"></i> Mon - Sun: 8:00 AM - 11:00 PM</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for special offers and updates!</p>
+                <div class="nav-search" style="background: #333; border: 1px solid #555; margin-top: 1rem;">
+                    <input placeholder="Your email..." class="search-input" style="background: transparent; color: #fff;">
+                    <div class="search-icon" style="background: #f39c12;">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Ansh Cafe. All rights reserved. | Designed with ❤️ for food lovers</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navbar = document.getElementById('navbar');
+        
+        menuBtn.addEventListener('click', () => {
+            navbar.classList.toggle('show');
+            const icon = menuBtn.querySelector('i');
+            
+            if (navbar.classList.contains('show')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Form submission feedback
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your message! We will contact you soon.');
+                form.reset();
+            });
+        }
+        
+        // Newsletter form
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailInput = newsletterForm.querySelector('input[type="email"]');
+                alert(`Thank you for subscribing with ${emailInput.value}!`);
+                emailInput.value = '';
+            });
+        }
+    </script>
+</body>
+</html>

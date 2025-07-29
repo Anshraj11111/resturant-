@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Food</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            transition: 0.3s linear;
+        }
+
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+            scroll-padding-top: 9rem;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-image: url("https://tourist-images-prd-s3.s3.eu-west-1.amazonaws.com/ipd863rxx7adkf8g3zypv0j0nfg2");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            animation: zoomInOut 10s infinite ease-in-out;
+        }
+
+        @keyframes zoomInOut {
+            0%, 100% {
+                background-size: 100%;
+            }
+            50% {
+                background-size: 110%;
+            }
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .header .logo img {
+            height: 5rem;
+            width: auto;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .navbar a {
+            font-size: 1.4rem;
+            color: #fff;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .navbar a:hover {
+            color: rgb(239, 226, 205);
+            border-bottom: 0.2rem solid aliceblue;
+            padding-bottom: 0.5rem;
+        }
+
+        .nav-search {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            width: 300px;
+            height: 35px;
+            border-radius: 5px;
+            margin: 0 1rem;
+        }
+
+        .search-list {
+            background-color: #f3f3f3;
+            width: 40px;
+            text-align: center;
+            border-radius: 5px;
+            border: none;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            font-size: 1.2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            font-size: 1.2rem;
+            border: none;
+            padding: 0 0.5rem;
+        }
+
+        .search-icon {
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            color: #0f1111;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            cursor: pointer;
+        }
+
+        .nav-search:hover {
+            border: 2px solid orange;
+        }
+
+        .icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icons div, .icons a {
+            color: #fff;
+            cursor: pointer;
+            font-size: 2rem;
+        }
+
+        .icons div:hover, .icons a:hover {
+            color: rgb(239, 226, 205);
+        }
+
+        #menu-btn {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        h1 {
+            margin-top: 100px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 4rem;
+            color: antiquewhite;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            margin: 0 auto;
+            max-width: 1400px;
+            padding: 0 2rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 0;
+        }
+
+        .review .box {
+            text-align: center;
+            border: 2px solid #444;
+            min-height: 450px;
+            width: 100%;
+            max-width: 320px;
+            margin: 1rem auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            backdrop-filter: blur(5px);
+        }
+
+        .review .box p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #fff;
+            padding: 1rem 0;
+            margin-bottom: auto;
+        }
+
+        .review .box .user {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 1rem auto;
+            border: 3px solid #fff;
+        }
+
+        .review .box h3 {
+            padding: 1rem 0;
+            font-size: 1.8rem;
+            color: #fff;
+            margin: 0;
+        }
+
+        .review .box .stars {
+            margin: 1rem 0;
+        }
+
+        .review .box .stars i {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin: 0 0.2rem;
+        }
+
+        .review .box .price {
+            font-size: 1.6rem;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .review .box .price .span {
+            text-decoration: line-through;
+            color: #888;
+            margin-left: 0.5rem;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-navbar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: left 0.3s ease;
+        }
+
+        .mobile-navbar.active {
+            left: 0;
+        }
+
+        .mobile-navbar a {
+            font-size: 2rem;
+            color: #fff;
+            margin: 1rem 0;
+            text-decoration: none;
+        }
+
+        .mobile-navbar a:hover {
+            color: rgb(239, 226, 205);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 3rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .navbar {
+                gap: 1.5rem;
+            }
+            
+            .navbar a {
+                font-size: 1.3rem;
+            }
+            
+            .nav-search {
+                width: 250px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .header {
+                padding: 1rem 3%;
+            }
+            
+            .nav-search {
+                width: 200px;
+                height: 32px;
+            }
+            
+            .search-input {
+                font-size: 1.1rem;
+            }
+            
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .review .box {
+                max-width: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 55%;
+            }
+            
+            .header {
+                padding: 1rem 2%;
+            }
+            
+            .navbar {
+                display: none;
+            }
+            
+            .nav-search {
+                display: none;
+            }
+            
+            #menu-btn {
+                display: block;
+            }
+            
+            h1 {
+                font-size: 3rem;
+                margin-top: 80px;
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .row {
+                gap: 1.5rem;
+            }
+            
+            .review .box {
+                max-width: 100%;
+                margin: 0.5rem auto;
+                padding: 1.5rem 1rem;
+            }
+            
+            .review .box p {
+                font-size: 1.3rem;
+            }
+            
+            .review .box h3 {
+                font-size: 1.6rem;
+            }
+            
+            .review .box .stars i {
+                font-size: 1.6rem;
+            }
+            
+            .review .box .price {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            html {
+                font-size: 50%;
+            }
+            
+            .header {
+                padding: 0.8rem 2%;
+            }
+            
+            .header .logo img {
+                height: 4rem;
+            }
+            
+            .icons {
+                gap: 1rem;
+            }
+            
+            .icons div, .icons a {
+                font-size: 1.8rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+                margin-top: 70px;
+            }
+            
+            .review .box {
+                min-height: 400px;
+                padding: 1rem;
+            }
+            
+            .review .box p {
+                font-size: 1.2rem;
+                padding: 0.8rem 0;
+            }
+            
+            .review .box .user {
+                height: 70px;
+                width: 70px;
+            }
+            
+            .review .box h3 {
+                font-size: 1.5rem;
+                padding: 0.8rem 0;
+            }
+            
+            .review .box .stars i {
+                font-size: 1.4rem;
+            }
+            
+            .review .box .price {
+                font-size: 1.3rem;
+            }
+            
+            body {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .row {
+                gap: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .review .box {
+                min-height: 380px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .header {
+                padding: 0.5rem 1%;
+            }
+            
+            .header .logo img {
+                height: 3.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .review .box p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Landscape orientation for mobile devices */
+        @media (max-height: 500px) and (orientation: landscape) {
+            h1 {
+                margin-top: 60px;
+                font-size: 2rem;
+                padding: 1rem;
+            }
+            
+            .review .box {
+                min-height: 300px;
+                padding: 1rem;
+            }
+            
+            .review .box p {
+                font-size: 1rem;
+                padding: 0.5rem 0;
+            }
+            
+            .review .box .user {
+                height: 50px;
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <a href="#" class="logo">
+                <img src="anshcafeimage.jpg" alt="Logo">
+            </a>
+            <nav class="navbar">
+                <a href="ansh cafe .html">Home</a>
+                <a href="about.html">About</a>
+                <a href="Menu.html">Menu</a>
+                <a href="product.html">Special Offer</a>
+                <a href="contact..html">Contact</a>
+                <a href="review.html">Review</a>
+                <a href="feedback">Blogs</a>
+            </nav>
+            <div class="nav-search">
+                <select class="search-list">
+                    <option>All</option>
+                </select>
+                <input placeholder="Search" class="search-input">
+                <div class="search-icon">
+                    <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                </div>
+            </div>
+            <div class="icons">
+                <div class="fas fa-search" id="search-btn"></div>
+                <a href="cart.html">
+                    <div class="fas fa-shopping-cart" id="cart-btn"></div>
+                </a>
+                <div class="fas fa-bars" id="menu-btn"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Menu -->
+    <nav class="mobile-navbar" id="mobile-navbar">
+        <div class="close-btn" id="close-btn">&times;</div>
+        <a href="ansh cafe .html">Home</a>
+        <a href="about.html">About</a>
+        <a href="Menu.html">Menu</a>
+        <a href="product.html">Special Offer</a>
+        <a href="contact..html">Contact</a>
+        <a href="review.html">Review</a>
+        <a href="feedback">Blogs</a>
+        <div class="nav-search" style="margin-top: 2rem;">
+            <select class="search-list">
+                <option>All</option>
+            </select>
+            <input placeholder="Search" class="search-input">
+            <div class="search-icon">
+                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="review" id="review">
+        <h1>Customer's Review</h1>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+                    <div class="box">
+                        <p>"Switching to organic foods has been amazing! The apples are sweeter, the veggies are fresher, and the meats are more flavorful. The quality is evident in every bite."</p>
+                        <img src="https://www.the-sun.com/wp-content/uploads/sites/6/2023/02/fears-eerily-realistic-ai-generated-796012871.jpg?w=1440" class="user" alt="Customer Jully">
+                        <h3>Jully</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="price">₹9.00 <span class="span">₹12.00</span></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+                    <div class="box">
+                        <p>"The freshness of organic food is unbeatable. Every ingredient tastes like it's just been picked. The switch to organic was the best decision for my family's health."</p>
+                        <img src="https://image.shutterstock.com/image-photo/surprised-cheerful-happy-african-american-260nw-2093992765.jpg" class="user" alt="Customer Robert">
+                        <h3>Robert</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="price">₹10.00 <span class="span">₹13.00</span></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+                    <div class="box">
+                        <p>"The difference in taste with organic products is undeniable. I love knowing my food is free from harmful chemicals. Plus, the flavor is so much richer!"</p>
+                        <img src="https://t3.ftcdn.net/jpg/02/28/94/22/360_F_228942236_F53W8OYRXcWguSwwhy2A0KmEJGtW4r2X.jpg" class="user" alt="Customer Jassie">
+                        <h3>Jassie</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="price">₹11.00 <span class="span">₹14.00</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu functionality
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileNavbar = document.getElementById('mobile-navbar');
+        const closeBtn = document.getElementById('close-btn');
+
+        menuBtn.addEventListener('click', () => {
+            mobileNavbar.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileNavbar.classList.remove('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileNavbar.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNavbar.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileNavbar.contains(e.target) && !menuBtn.contains(e.target)) {
+                mobileNavbar.classList.remove('active');
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                mobileNavbar.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
