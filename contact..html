@@ -23,65 +23,120 @@
             background-attachment: fixed;
             min-height: 100vh;
             color: #fff;
+            padding-top: 80px; /* Added for fixed header */
         }
         
         /* Header Styles */
         .header {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background: rgba(0, 0, 0, 0.85);
-            position: sticky;
+            padding: 1rem 5%;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
+
+        .header .logo img {
+            height: 5rem;
+            width: auto;
+            max-height: 70px;
+            transition: all 0.3s ease;
         }
-        
-        .logo img {
-            height: 60px;
-            border-radius: 50%;
-            margin-right: 12px;
-            border: 2px solid #d4af37;
-        }
-        
-        .logo h1 {
-            color: #d4af37;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        
-        .logo span {
-            color: #fff;
-            font-weight: 300;
-        }
-        
+
         .navbar {
             display: flex;
-            gap: 20px;
+            gap: 1.5rem;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            transition: all 0.4s ease;
         }
-        
+
         .navbar a {
+            font-size: 1.4rem;
             color: #fff;
             text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 8px 15px;
-            border-radius: 5px;
+            white-space: nowrap;
+            padding: 0.5rem;
+            transition: all 0.3s;
         }
-        
+
         .navbar a:hover {
-            background: #d4af37;
-            color: #000;
+            color: rgb(239, 226, 205);
+            border-bottom: 0.2rem solid aliceblue;
+        }
+
+        .nav-search {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            width: 300px;
+            height: 35px;
+            border-radius: 5px;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-list {
+            background-color: #f3f3f3;
+            width: 40px;
+            text-align: center;
+            border-radius: 5px;
+            border: none;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            font-size: 1.2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            font-size: 1.2rem;
+            border: none;
+            padding: 0 0.5rem;
+        }
+
+        .search-icon {
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            color: #0f1111;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            cursor: pointer;
+        }
+
+        .nav-search:hover {
+            border: 2px solid orange;
+        }
+
+        .icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .icons div, .icons a {
+            color: #fff;
+            cursor: pointer;
+            font-size: 2rem;
+            transition: all 0.3s;
+        }
+
+        .icons div:hover, .icons a:hover {
+            color: rgb(239, 226, 205);
         }
         
-        .menu-btn {
+        .mobile-menu-toggle {
             display: none;
             font-size: 1.5rem;
             color: #d4af37;
@@ -307,7 +362,7 @@
             display: flex;
             gap: 15px;
             margin-top: 15px;
-            justify-content: center;
+            justify-content: flex-start;
         }
         
         .social-link {
@@ -339,6 +394,20 @@
             font-size: 0.9rem;
         }
         
+        /* Form validation styles */
+        .input.error {
+            border: 2px solid #ff3860;
+        }
+        
+        .error-message {
+            color: #ff3860;
+            font-size: 0.9rem;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            text-align: left;
+            padding-left: 25px;
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             .contact-container {
@@ -365,13 +434,14 @@
                 flex-direction: column;
                 padding: 20px;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+                width: 100%;
             }
             
             .navbar.show {
                 display: flex;
             }
             
-            .menu-btn {
+            .mobile-menu-toggle {
                 display: block;
             }
             
@@ -382,11 +452,30 @@
             .map-container {
                 height: 350px;
             }
+            
+            .nav-search {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                width: 90%;
+                margin: 10px auto;
+                z-index: 100;
+            }
+            
+            .nav-search.show {
+                display: flex;
+            }
+            
+            .mobile-search-toggle {
+                display: block;
+            }
         }
         
         @media (max-width: 576px) {
-            .logo h1 {
-                font-size: 1.5rem;
+            .logo img {
+                height: 4rem !important;
             }
             
             .contact-form-container {
@@ -406,30 +495,72 @@
             .footer-section {
                 text-align: center;
             }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .contact-info {
+                gap: 15px;
+            }
+            
+            .info-card {
+                min-width: 100%;
+            }
+            
+            .input {
+                height: 45px;
+                font-size: 14px;
+            }
+            
+            .contact-right button {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <!-- <header class="header">
-        <div class="logo">
-            <img src="https://images.unsplash.com/photo-1610878180933-123728745d22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FuYWRhJTIwbmF0dXJlfGVufDB8fDB8fHww&w=1000&q=80" alt="Ansh Restaurant Logo">
-            <h1>ANSH <span>RESTAURANT</span></h1>
+    <header>
+        <div class="header">
+            <a href="#" class="logo">
+                <img src="anshcafeimage.jpg" alt="Ansh Cafe Logo">
+            </a>
+            
+            <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="Menu.html">Menu</a>
+                <a href="product.html">Special Offers</a>
+                <a href="contact.html">Contact</a>
+                <a href="review.html">Reviews</a>
+            </nav>
+            
+            <div class="nav-search">
+                <select class="search-list">
+                    <option>All</option>
+                    <option>Food</option>
+                    <option>Drinks</option>
+                    <option>Desserts</option>
+                </select>
+                <input type="text" placeholder="Search menu..." class="search-input">
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+            
+            <div class="icons">
+                <div class="fas fa-search mobile-search-toggle"></div>
+                <a href="cart.html">
+                    <div class="fas fa-shopping-cart" id="cart-btn"></div>
+                </a>
+                <div class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
         </div>
-        
-        <nav class="navbar" id="navbar">
-            <a href="ansh cafe .html">Home</a>
-            <a href="about.html">About</a>
-            <a href="Menu.html">Menu</a>
-            <a href="product.html">Special Offers</a>
-            <a href="contact..html" class="active">Contact</a>
-            <a href="review.html">Reviews</a>
-        </nav>
-        
-        <button class="menu-btn" id="menuBtn">
-            <i class="fas fa-bars"></i>
-        </button>
-    </header> -->
+    </header>
     
     <!-- Contact Section -->
     <div class="contact-container">
@@ -440,15 +571,22 @@
                 <p style="color: #ddd; margin-top: 15px;">We'd love to hear from you!</p>
             </div>
             
-            <form action="https://api.web3forms.com/submit" method="POST">
+            <form id="contactForm">
                 <input type="hidden" name="access_key" value="7f4c9a9f-cab3-480e-9d39-be4f3766120c">
                 
                 <input type="text" name="name" placeholder="Your Name" class="input" required>
-                <input type="email" name="email" placeholder="Your Email" class="input" required>
-                <input type="text" name="subject" placeholder="Subject" class="input" required>
-                <textarea name="message" placeholder="Your message" class="input" required></textarea>
+                <div class="error-message" id="nameError"></div>
                 
-                <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+                <input type="email" name="email" placeholder="Your Email" class="input" required>
+                <div class="error-message" id="emailError"></div>
+                
+                <input type="text" name="subject" placeholder="Subject" class="input" required>
+                <div class="error-message" id="subjectError"></div>
+                
+                <textarea name="message" placeholder="Your message" class="input" required></textarea>
+                <div class="error-message" id="messageError"></div>
+                
+                <button type="submit" id="submitBtn">Send Message <i class="fas fa-paper-plane"></i></button>
             </form>
         </div>
 
@@ -498,17 +636,17 @@
                 <h3>About Ansh Cafe</h3>
                 <p>Experience the finest flavors at Ansh Cafe, where tradition meets taste. We serve authentic Indian cuisine with a modern twist, made from the freshest ingredients and traditional recipes passed down through generations.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
 
             <div class="footer-section">
                 <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="ansh cafe .html">Home</a></li>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="Menu.html">Our Menu</a></li>
                     <li><a href="product.html">Special Offers</a></li>
@@ -529,7 +667,7 @@
                 <h3>Newsletter</h3>
                 <p>Subscribe to our newsletter for special offers and updates!</p>
                 <div class="nav-search" style="background: #333; border: 1px solid #555; margin-top: 1rem;">
-                    <input placeholder="Your email..." class="search-input" style="background: transparent; color: #fff;">
+                    <input type="email" placeholder="Your email..." class="search-input" style="background: transparent; color: #fff;">
                     <div class="search-icon" style="background: #f39c12;">
                         <i class="fas fa-paper-plane"></i>
                     </div>
@@ -537,19 +675,19 @@
             </div>
         </div>
 
-        <div class="footer-bottom">
+        <div class="copyright">
             <p>&copy; 2024 Ansh Cafe. All rights reserved. | Designed with ❤️ for food lovers</p>
         </div>
     </footer>
     
     <script>
         // Mobile menu toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const navbar = document.getElementById('navbar');
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navbar = document.querySelector('.navbar');
         
-        menuBtn.addEventListener('click', () => {
+        mobileMenuToggle.addEventListener('click', () => {
             navbar.classList.toggle('show');
-            const icon = menuBtn.querySelector('i');
+            const icon = mobileMenuToggle.querySelector('i');
             
             if (navbar.classList.contains('show')) {
                 icon.classList.remove('fa-bars');
@@ -560,26 +698,123 @@
             }
         });
         
-        // Form submission feedback
-        const form = document.querySelector('form');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Thank you for your message! We will contact you soon.');
-                form.reset();
-            });
-        }
+        // Mobile search toggle
+        const mobileSearchToggle = document.querySelector('.mobile-search-toggle');
+        const navSearch = document.querySelector('.nav-search');
         
-        // Newsletter form
-        const newsletterForm = document.querySelector('.newsletter-form');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const emailInput = newsletterForm.querySelector('input[type="email"]');
-                alert(`Thank you for subscribing with ${emailInput.value}!`);
-                emailInput.value = '';
-            });
-        }
+        mobileSearchToggle.addEventListener('click', () => {
+            navSearch.classList.toggle('show');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navbar.contains(e.target) && !mobileMenuToggle.contains(e.target) && navbar.classList.contains('show')) {
+                navbar.classList.remove('show');
+                const icon = mobileMenuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+            
+            if (!navSearch.contains(e.target) && !mobileSearchToggle.contains(e.target) && navSearch.classList.contains('show')) {
+                navSearch.classList.remove('show');
+            }
+        });
+        
+        // Form validation and submission
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Reset errors
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            document.querySelectorAll('.input').forEach(el => el.classList.remove('error'));
+            
+            // Validate form
+            let isValid = true;
+            const nameInput = contactForm.querySelector('input[name="name"]');
+            const emailInput = contactForm.querySelector('input[name="email"]');
+            const subjectInput = contactForm.querySelector('input[name="subject"]');
+            const messageInput = contactForm.querySelector('textarea[name="message"]');
+            
+            if (!nameInput.value.trim()) {
+                document.getElementById('nameError').textContent = 'Name is required';
+                nameInput.classList.add('error');
+                isValid = false;
+            }
+            
+            if (!emailInput.value.trim()) {
+                document.getElementById('emailError').textContent = 'Email is required';
+                emailInput.classList.add('error');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+                document.getElementById('emailError').textContent = 'Invalid email format';
+                emailInput.classList.add('error');
+                isValid = false;
+            }
+            
+            if (!subjectInput.value.trim()) {
+                document.getElementById('subjectError').textContent = 'Subject is required';
+                subjectInput.classList.add('error');
+                isValid = false;
+            }
+            
+            if (!messageInput.value.trim()) {
+                document.getElementById('messageError').textContent = 'Message is required';
+                messageInput.classList.add('error');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Disable button to prevent multiple submissions
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+            
+            try {
+                // Simulate form submission (in a real app, you would send to your server)
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Show success message
+                alert('Thank you for your message! We will contact you soon.');
+                
+                // Reset form
+                contactForm.reset();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Something went wrong. Please try again.');
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane"></i>';
+            }
+        });
+        
+        // Newsletter subscription
+        const newsletterBtn = document.querySelector('.footer-section:last-child .search-icon');
+        const newsletterInput = document.querySelector('.footer-section:last-child .search-input');
+        
+        newsletterBtn.addEventListener('click', () => {
+            if (newsletterInput.value.trim() === '') {
+                alert('Please enter your email address');
+                return;
+            }
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterInput.value)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Simulate subscription
+            newsletterBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            
+            setTimeout(() => {
+                newsletterBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+                alert(`Thank you for subscribing with ${newsletterInput.value}!`);
+                newsletterInput.value = '';
+            }, 1000);
+        });
     </script>
 </body>
 </html>
